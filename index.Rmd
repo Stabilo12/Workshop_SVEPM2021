@@ -90,6 +90,7 @@ Let's first visualize the data
 ```{r, warning=FALSE, message=FALSE}
 plot_richness(ps1, "Pen", "Feed", measures=c("Observed", "Shannon", "Simpson", "InvSimpson")) 
 ```
+
 *What stands out?* 
 
 **Let's test the four different (non-phylogenetic) alpha diversities on feed and pen** 
