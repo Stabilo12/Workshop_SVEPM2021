@@ -1,6 +1,5 @@
 first-break-out-room
-calculate-alpha-diversities
-load-packages
 create-phyloseq-object
+calculate-alpha-diversities
 second-break-out-room
 third-break-out-room

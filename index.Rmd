@@ -6,14 +6,14 @@ site: bookdown::bookdown_site
 ---
 
 # First break-out room  
-### Calculate alpha-diversities
 
-> Additional reading  
-> Shetty Sudarshan A, Lahti Leo, Hermes Gerben DA, & Hauke Smidt. (2020, April 11). 
-> Microbial bioinformatics introductory course material 2018 (Version v3.0). Zenodo | 
-> http://doi.org/10.5281/zenodo.1436630
+Study design data 
+```{r ,echo=FALSE}
+img <- readPNG("phyloseq.png")
+ grid.raster(img)
+```
 
-#### Load packages
+Load packages
 ```{r}
 library(phyloseq) 
 library(microbiome) 
@@ -26,17 +26,21 @@ library(nlme)
 library(ggplot2)
 library(ape)
 library(vegan)
+library(data.table)
+library(DT)
 ```
 
-## Create Phyloseq object 
-> Additional reading  
-> https://joey711.github.io/phyloseq/
-> https://joey711.github.io/phyloseq/import-data.html
+## Create Phyloseq object
+> Additional reading [Phyloseq](https://joey711.github.io/phyloseq/) 
 
-Let's start with uploading the data, 3 files are needed, 
-1. Biom file 
-2. Metadata file
-3. Tree file, 
+* Let's start with uploading the [data](https://github.com/Stabilo12/Workshop_SVEPM2021), 3 files are needed:
+  + 1. Biom file 
+  + 2. Metadata file
+  + 3. Tree file
+  
+> The data we use in this workshop has been [publised](https://doi.org/10.1186/s42523-019-0009-z ) 
+
+A phyloseq object contains information on: the abundances of the amplicon sequence variant (ASV), the taxonomy of the ASV, the phylogenetic tree, and the metadata of the samples. 
 
 ```{r, warning=FALSE, message=FALSE,}
 pseq <- read_phyloseq(otu.file= "BiomWorkshop.biom1", 
@@ -49,16 +53,97 @@ ps <- merge_phyloseq(pseq, treefile)
 ps
 ```
 
-ps is a phyloseq object
-
-> The data we use in this workshop has been publised 
-> https://doi.org/10.1186/s42523-019-0009-z 
-
+ps is the phyloseq object and contains 28 chicken samples and 489 ASV.     
+We can view the  taxonomy of the ASV within a taxa table:
 
 ```{r}
-ps <- prune_taxa(taxa_sums(ps) > 0, ps)
-ps
+datatable(tax_table(ps))
 ```
 
+The focus is on the diversities but a *mini* sequences controle cannot be missed.  
+The datatable shows the presences of an unknown Domain ("NA"), we want to remove this.   
+*Do you know why?*
 
+```{r}
+ps1 <- subset_taxa(ps, Domain!="NA")
+ps1
+```
 
+**Summary sequence data**   
+To review the sequence data in we can use the summary function
+```{r}
+summarize_phyloseq(ps1) 
+```
+*What is the number of singletons in this dataset?*
+
+**Check rarefaction**   
+The number of species = ASV (y-as) should reach a plateau if the sample size = reads (x-as) is large enough.
+
+```{r, warning=FALSE, message=FALSE}
+otu_tab <- t(abundances(ps1))
+p <- vegan::rarecurve(otu_tab, step = 50, label = FALSE, sample = min(rowSums(otu_tab), Col ="red", cex = 0.5))
+```
+
+## Calculate alpha-diversities
+Let's first visualize the data
+
+```{r, warning=FALSE, message=FALSE}
+plot_richness(ps1, "Pen", "Feed", measures=c("Observed", "Shannon", "Simpson", "InvSimpson")) 
+```
+*What stands out?* 
+
+**Let's test the four different (non-phylogenetic) alpha diversities on feed and pen** 
+```{r, warning = FALSE}
+alpha <- estimate_richness(ps1, measures = c("Observed", "Shannon", "Simpson", "InvSimpson" ))
+meta <- meta(ps1)  #extract metadata
+```
+
+Observed
+```{r,warning=FALSE,}
+kruskal.pd <- kruskal.test(alpha$Observed ~ meta$Feed)
+print(kruskal.pd)
+pairwise.wilcox.test(alpha$Observed, meta$Pen, p.adjust.method = "BH")
+```
+
+Simpson
+```{r}
+kruskal.pd <- kruskal.test(alpha$Simpson ~ meta$Feed)
+print(kruskal.pd)
+pairwise.wilcox.test(alpha$Simpson, meta$Pen, p.adjust.method = "BH") 
+```
+
+Shannon
+```{r}
+kruskal.pd <- kruskal.test(alpha$Shannon ~ meta$Feed)
+print(kruskal.pd)
+pairwise.wilcox.test(alpha$Shannon, meta$Pen, p.adjust.method = "BH")
+```
+
+Phylogenetic diversity 
+```{r}
+#library(picante)
+ps.otu <- as.data.frame(ps1@otu_table)
+ps.tree <- ps1@phy_tree
+
+df.pd <- pd(t(ps.otu), treefile, include.root=T) # rooted tree
+meta$Phylogenetic_Diversity <- df.pd$PD
+
+pd.plot <- ggboxplot(meta, x = "Pen",
+                     y = "Phylogenetic_Diversity",
+                     fill = "Feed")
+
+pd.plot
+
+```
+
+```{r}
+kruskal.pd <- kruskal.test(meta$Phylogenetic_Diversity ~ meta$Pen)
+print(kruskal.pd)
+
+pairwise.wilcox.test(meta$Phylogenetic_Diversity, meta$Pen, p.adjust.method = "BH")
+```
+
+> Additional reading
+> Shetty Sudarshan A, Lahti Leo, Hermes Gerben DA, & Hauke Smidt. (2020, April 11) 
+> Microbial bioinformatics introductory course material 2018 (Version v3.0). Zenodo 
+> http://doi.org/10.5281/zenodo.1436630
