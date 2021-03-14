@@ -1,9 +1,64 @@
 --- 
-title: "Workshop SVEPM 2021"
+title: "Workshop 2 SVEPM 2021"
 author: "J.G. Kers & E.A.J. Fischer"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
-# Down the rabbit-hole
+# First break-out room  
+### Calculate alpha-diversities
+
+> Additional reading  
+> Shetty Sudarshan A, Lahti Leo, Hermes Gerben DA, & Hauke Smidt. (2020, April 11). 
+> Microbial bioinformatics introductory course material 2018 (Version v3.0). Zenodo | 
+> http://doi.org/10.5281/zenodo.1436630
+
+#### Load packages
+```{r}
+library(phyloseq) 
+library(microbiome) 
+library(data.table)
+library(RColorBrewer)
+library(ggpubr)
+library(readr)
+library(picante)
+library(nlme)
+library(ggplot2)
+library(ape)
+library(vegan)
+```
+
+## Create Phyloseq object 
+> Additional reading  
+> https://joey711.github.io/phyloseq/
+> https://joey711.github.io/phyloseq/import-data.html
+
+Let's start with uplaoding the data, 3 files are needed, 
+1. Biom file 
+2. Metadata file
+3. Tree file, 
+
+```{r, warning=FALSE, message=FALSE,}
+pseq <- read_phyloseq(otu.file= "BiomWorkshop.biom1", 
+                      taxonomy.file = NULL, 
+                      metadata.file = "MetaWorkshop.csv", 
+                      type="biom", sep =";"  )
+
+treefile <- read_tree("TreeWorkshop.tree") 
+ps <- merge_phyloseq(pseq, treefile)
+ps
+```
+
+ps is a phyloseq object
+
+> The data we use in this workshop has been publised 
+> https://doi.org/10.1186/s42523-019-0009-z 
+
+
+```{r}
+ps <- prune_taxa(taxa_sums(ps) > 0, ps)
+ps
+```
+
+
 
