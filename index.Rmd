@@ -33,7 +33,7 @@ library(vegan)
 > https://joey711.github.io/phyloseq/
 > https://joey711.github.io/phyloseq/import-data.html
 
-Let's start with uplaoding the data, 3 files are needed, 
+Let's start with uploading the data, 3 files are needed, 
 1. Biom file 
 2. Metadata file
 3. Tree file, 
