@@ -9,7 +9,7 @@ site: bookdown::bookdown_site
 
 Study design data 
 ```{r ,echo=FALSE}
-img <- readPNG("phyloseq.png")
+img <- readPNG("Study.png")
  grid.raster(img)
 ```
 
@@ -25,7 +25,6 @@ library(picante)
 library(nlme)
 library(ggplot2)
 library(ape)
-library(vegan)
 library(data.table)
 library(DT)
 ```
@@ -90,6 +89,7 @@ Let's first visualize the data
 ```{r, warning=FALSE, message=FALSE}
 plot_richness(ps1, "Pen", "Feed", measures=c("Observed", "Shannon", "Simpson", "InvSimpson")) 
 ```
+
 *What stands out?* 
 
 **Let's test the four different (non-phylogenetic) alpha diversities on feed and pen** 

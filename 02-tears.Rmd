@@ -36,8 +36,12 @@ p <- plot_ordination(ps1, ord, color = "Feed", label="Pen")  #shape= "Pen",
 p1 <- p + theme_bw()  + ggtitle("PCoA unifrac") 
 p1
 ```
-*What stands out?* 
-*Which beta diversity would you use?* 
+
+*What stands out?*   
+
+
+*Which beta diversity would you use?*   
+
 
 ## PERMANOVA
 ```{r}
@@ -65,7 +69,9 @@ permutest(ps.disper)
 
 ```
 
+
 *Which beta diversity explained most of the variation with the factor feed?* 
+
 
 
 > Additional reading

@@ -24,7 +24,7 @@
 <meta name="author" content="J.G. Kers &amp; E.A.J. Fischer" />
 
 
-<meta name="date" content="2021-03-14" />
+<meta name="date" content="2021-03-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -147,8 +147,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#create-phyloseq-object"><i class="fa fa-check"></i><b>1.1</b> Create Phyloseq object</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#calculate-alpha-diversities"><i class="fa fa-check"></i><b>1.2</b> Calculate alpha-diversities</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="second-break-out-room.html"><a href="second-break-out-room.html"><i class="fa fa-check"></i><b>2</b> Second break-out room</a></li>
-<li class="chapter" data-level="3" data-path="third-break-out-room.html"><a href="third-break-out-room.html"><i class="fa fa-check"></i><b>3</b> Third break-out room</a></li>
+<li class="chapter" data-level="2" data-path="second-break-out-room.html"><a href="second-break-out-room.html"><i class="fa fa-check"></i><b>2</b> Second break-out room</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="second-break-out-room.html"><a href="second-break-out-room.html#permanova"><i class="fa fa-check"></i><b>2.1</b> PERMANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="third-break-out-room.html"><a href="third-break-out-room.html"><i class="fa fa-check"></i><b>3</b> Third break-out room</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="third-break-out-room.html"><a href="third-break-out-room.html#barplot"><i class="fa fa-check"></i><b>3.1</b> Barplot</a></li>
+<li class="chapter" data-level="3.2" data-path="third-break-out-room.html"><a href="third-break-out-room.html#dendrogram"><i class="fa fa-check"></i><b>3.2</b> Dendrogram</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -170,8 +177,162 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="second-break-out-room" class="section level1" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Second break-out room</h1>
-<p>Calculate beta diversties</p>
+<p>We will calculated four different beta diversities: Bray-Curtis, Jaccard, unweighted UniFrac and Weighted UniFrac and use Principal Coordinates Analysis (PCoA, = Multidimensional scaling, MDS). This is a method to explore and to visualize similarities or dissimilarities of data.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="second-break-out-room.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb31-2"><a href="second-break-out-room.html#cb31-2" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">as</span>(<span class="fu">sample_data</span>(ps1), <span class="st">&quot;data.frame&quot;</span>)</span>
+<span id="cb31-3"><a href="second-break-out-room.html#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="second-break-out-room.html#cb31-4" aria-hidden="true" tabindex="-1"></a>ord <span class="ot">&lt;-</span> <span class="fu">ordinate</span>(ps1, <span class="at">method =</span> <span class="st">&quot;PCoA&quot;</span>, <span class="at">distance =</span> <span class="st">&quot;bray&quot;</span>) </span>
+<span id="cb31-5"><a href="second-break-out-room.html#cb31-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_ordination</span>(ps1, ord, <span class="at">color =</span> <span class="st">&quot;Feed&quot;</span>,  <span class="at">label=</span><span class="st">&quot;Pen&quot;</span>)  <span class="co">#shape= &quot;Pen&quot;,</span></span>
+<span id="cb31-6"><a href="second-break-out-room.html#cb31-6" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">theme_bw</span>()  <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;PCoA Jaccard&quot;</span>) </span>
+<span id="cb31-7"><a href="second-break-out-room.html#cb31-7" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="second-break-out-room.html#cb32-1" aria-hidden="true" tabindex="-1"></a>ord <span class="ot">&lt;-</span> <span class="fu">ordinate</span>(ps1, <span class="at">method =</span> <span class="st">&quot;PCoA&quot;</span>, <span class="at">distance =</span> <span class="st">&quot;jaccard&quot;</span>, <span class="at">binary =</span> <span class="cn">TRUE</span>) <span class="do">##binary = TRUE!</span></span>
+<span id="cb32-2"><a href="second-break-out-room.html#cb32-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_ordination</span>(ps1, ord, <span class="at">color =</span> <span class="st">&quot;Feed&quot;</span>,  <span class="at">label=</span><span class="st">&quot;Pen&quot;</span>)  <span class="co">#shape= &quot;Pen&quot;,</span></span>
+<span id="cb32-3"><a href="second-break-out-room.html#cb32-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">theme_bw</span>()  <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;PCoA Jaccard&quot;</span>) </span>
+<span id="cb32-4"><a href="second-break-out-room.html#cb32-4" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="second-break-out-room.html#cb33-1" aria-hidden="true" tabindex="-1"></a>ord <span class="ot">&lt;-</span> <span class="fu">ordinate</span>(ps1, <span class="at">method =</span> <span class="st">&quot;PCoA&quot;</span>, <span class="at">distance =</span> <span class="st">&quot;wunifrac&quot;</span>) </span>
+<span id="cb33-2"><a href="second-break-out-room.html#cb33-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_ordination</span>(ps1, ord, <span class="at">color =</span> <span class="st">&quot;Feed&quot;</span>,  <span class="at">label=</span><span class="st">&quot;Pen&quot;</span>)  <span class="co">#shape= &quot;Pen&quot;,</span></span>
+<span id="cb33-3"><a href="second-break-out-room.html#cb33-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">theme_bw</span>()  <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;PCoA wunifrac&quot;</span>) </span>
+<span id="cb33-4"><a href="second-break-out-room.html#cb33-4" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="second-break-out-room.html#cb34-1" aria-hidden="true" tabindex="-1"></a>ord <span class="ot">&lt;-</span> <span class="fu">ordinate</span>(ps1, <span class="at">method =</span> <span class="st">&quot;PCoA&quot;</span>, <span class="at">distance =</span> <span class="st">&quot;unifrac&quot;</span>) </span>
+<span id="cb34-2"><a href="second-break-out-room.html#cb34-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_ordination</span>(ps1, ord, <span class="at">color =</span> <span class="st">&quot;Feed&quot;</span>, <span class="at">label=</span><span class="st">&quot;Pen&quot;</span>)  <span class="co">#shape= &quot;Pen&quot;,</span></span>
+<span id="cb34-3"><a href="second-break-out-room.html#cb34-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">theme_bw</span>()  <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;PCoA unifrac&quot;</span>) </span>
+<span id="cb34-4"><a href="second-break-out-room.html#cb34-4" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><em>What stands out?</em></p>
+<p><em>Which beta diversity would you use?</em></p>
+<div id="permanova" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> PERMANOVA</h2>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="second-break-out-room.html#cb35-1" aria-hidden="true" tabindex="-1"></a>dist.b <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">distance</span>(ps1, <span class="at">method =</span> <span class="st">&quot;bray&quot;</span>)</span>
+<span id="cb35-2"><a href="second-break-out-room.html#cb35-2" aria-hidden="true" tabindex="-1"></a>dist.j <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">distance</span>(ps1, <span class="at">method =</span> <span class="st">&quot;jaccard&quot;</span>, <span class="at">binary =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb35-3"><a href="second-break-out-room.html#cb35-3" aria-hidden="true" tabindex="-1"></a>dist.uf <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">distance</span>(ps1, <span class="at">method =</span> <span class="st">&quot;unifrac&quot;</span>)</span>
+<span id="cb35-4"><a href="second-break-out-room.html#cb35-4" aria-hidden="true" tabindex="-1"></a>dist.wuf <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">distance</span>(ps1, <span class="at">method =</span> <span class="st">&quot;wunifrac&quot;</span>)</span>
+<span id="cb35-5"><a href="second-break-out-room.html#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="second-break-out-room.html#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="second-break-out-room.html#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="fu">adonis</span>(dist.b <span class="sc">~</span> Feed, <span class="at">data =</span> metadata, <span class="at">perm=</span><span class="dv">9999</span>) </span></code></pre></div>
+<pre><code>## 
+## Call:
+## adonis(formula = dist.b ~ Feed, data = metadata, permutations = 9999) 
+## 
+## Permutation: free
+## Number of permutations: 9999
+## 
+## Terms added sequentially (first to last)
+## 
+##           Df SumsOfSqs MeanSqs F.Model     R2 Pr(&gt;F)    
+## Feed       1    2.2000  2.2000  9.1588 0.2605  1e-04 ***
+## Residuals 26    6.2453  0.2402         0.7395           
+## Total     27    8.4453                 1.0000           
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="second-break-out-room.html#cb37-1" aria-hidden="true" tabindex="-1"></a>ps.disper <span class="ot">&lt;-</span> <span class="fu">betadisper</span>(dist.b, meta<span class="sc">$</span>Feed)</span>
+<span id="cb37-2"><a href="second-break-out-room.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">permutest</span>(ps.disper)</span></code></pre></div>
+<pre><code>## 
+## Permutation test for homogeneity of multivariate dispersions
+## Permutation: free
+## Number of permutations: 999
+## 
+## Response: Distances
+##           Df   Sum Sq   Mean Sq      F N.Perm Pr(&gt;F)
+## Groups     1 0.010126 0.0101263 2.3739    999  0.132
+## Residuals 26 0.110907 0.0042656</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="second-break-out-room.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adonis</span>(dist.j <span class="sc">~</span> Feed, <span class="at">data =</span> metadata, <span class="at">perm=</span><span class="dv">9999</span>) </span></code></pre></div>
+<pre><code>## 
+## Call:
+## adonis(formula = dist.j ~ Feed, data = metadata, permutations = 9999) 
+## 
+## Permutation: free
+## Number of permutations: 9999
+## 
+## Terms added sequentially (first to last)
+## 
+##           Df SumsOfSqs MeanSqs F.Model      R2 Pr(&gt;F)    
+## Feed       1    1.8183 1.81828  7.3404 0.22017  1e-04 ***
+## Residuals 26    6.4404 0.24771         0.77983           
+## Total     27    8.2587                 1.00000           
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="second-break-out-room.html#cb41-1" aria-hidden="true" tabindex="-1"></a>ps.disper <span class="ot">&lt;-</span> <span class="fu">betadisper</span>(dist.j, meta<span class="sc">$</span>Feed)</span>
+<span id="cb41-2"><a href="second-break-out-room.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">permutest</span>(ps.disper)</span></code></pre></div>
+<pre><code>## 
+## Permutation test for homogeneity of multivariate dispersions
+## Permutation: free
+## Number of permutations: 999
+## 
+## Response: Distances
+##           Df   Sum Sq  Mean Sq      F N.Perm Pr(&gt;F)    
+## Groups     1 0.047419 0.047419 17.286    999  0.001 ***
+## Residuals 26 0.071322 0.002743                         
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="second-break-out-room.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adonis</span>(dist.uf <span class="sc">~</span> Feed, <span class="at">data =</span> metadata, <span class="at">perm=</span><span class="dv">9999</span>) </span></code></pre></div>
+<pre><code>## 
+## Call:
+## adonis(formula = dist.uf ~ Feed, data = metadata, permutations = 9999) 
+## 
+## Permutation: free
+## Number of permutations: 9999
+## 
+## Terms added sequentially (first to last)
+## 
+##           Df SumsOfSqs MeanSqs F.Model      R2 Pr(&gt;F)    
+## Feed       1   0.70667 0.70667  11.734 0.31096  1e-04 ***
+## Residuals 26   1.56590 0.06023         0.68904           
+## Total     27   2.27257                 1.00000           
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="second-break-out-room.html#cb45-1" aria-hidden="true" tabindex="-1"></a>ps.disper <span class="ot">&lt;-</span> <span class="fu">betadisper</span>(dist.uf, meta<span class="sc">$</span>Feed)</span>
+<span id="cb45-2"><a href="second-break-out-room.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">permutest</span>(ps.disper)</span></code></pre></div>
+<pre><code>## 
+## Permutation test for homogeneity of multivariate dispersions
+## Permutation: free
+## Number of permutations: 999
+## 
+## Response: Distances
+##           Df   Sum Sq   Mean Sq      F N.Perm Pr(&gt;F)    
+## Groups     1 0.025001 0.0250014 38.108    999  0.001 ***
+## Residuals 26 0.017058 0.0006561                         
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="second-break-out-room.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adonis</span>(dist.wuf <span class="sc">~</span> Feed, <span class="at">data =</span> metadata, <span class="at">perm=</span><span class="dv">9999</span>) </span></code></pre></div>
+<pre><code>## 
+## Call:
+## adonis(formula = dist.wuf ~ Feed, data = metadata, permutations = 9999) 
+## 
+## Permutation: free
+## Number of permutations: 9999
+## 
+## Terms added sequentially (first to last)
+## 
+##           Df SumsOfSqs MeanSqs F.Model     R2 Pr(&gt;F)    
+## Feed       1   0.31792 0.31792  11.132 0.2998  1e-04 ***
+## Residuals 26   0.74253 0.02856         0.7002           
+## Total     27   1.06045                 1.0000           
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="second-break-out-room.html#cb49-1" aria-hidden="true" tabindex="-1"></a>ps.disper <span class="ot">&lt;-</span> <span class="fu">betadisper</span>(dist.wuf, meta<span class="sc">$</span>Feed)</span>
+<span id="cb49-2"><a href="second-break-out-room.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">permutest</span>(ps.disper)</span></code></pre></div>
+<pre><code>## 
+## Permutation test for homogeneity of multivariate dispersions
+## Permutation: free
+## Number of permutations: 999
+## 
+## Response: Distances
+##           Df   Sum Sq   Mean Sq      F N.Perm Pr(&gt;F)   
+## Groups     1 0.018811 0.0188112 8.6956    999  0.009 **
+## Residuals 26 0.056246 0.0021633                        
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><em>Which beta diversity explained most of the variation with the factor feed?</em></p>
+<blockquote>
+<p>Additional reading
+<a href="https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full">Gloor et al., 2017: Microbiome Datasets Are Compositional: And This Is Not Optional</a>
+<a href="https://doi.org/10.1111/mec.13536">Paliy and Shankar, 2016: Application of multivariate statistical techniques in microbial ecology</a></p>
+</blockquote>
 
+</div>
 </div>
             </section>
 
