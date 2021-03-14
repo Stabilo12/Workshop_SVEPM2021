@@ -1,6 +1,6 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAME HERE"
+title: "Workshop SVEPM 2021"
+author: "J.G. Kers & E.A.J. Fischer"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
