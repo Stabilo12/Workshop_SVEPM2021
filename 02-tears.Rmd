@@ -2,6 +2,7 @@
 
 We will calculated four different beta diversities: Bray-Curtis, Jaccard, unweighted UniFrac and Weighted UniFrac and use Principal Coordinates Analysis (PCoA, = Multidimensional scaling, MDS). This is a method to explore and to visualize similarities or dissimilarities of data.  
 
+## Calculate beta-diversities
 
 ```{r, warning=FALSE, message=FALSE}
 set.seed(12345)
@@ -71,7 +72,6 @@ permutest(ps.disper)
 
 
 *Which beta diversity explained most of the variation with the factor feed?* 
-
 
 
 > Additional reading

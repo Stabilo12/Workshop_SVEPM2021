@@ -34,7 +34,3 @@ plot(as.dendrogram(dend, hang = -1, cex = 0.6))
 
 *Try how cluster type influence the dendrogram*   
 
-
-```{r}
-
-```

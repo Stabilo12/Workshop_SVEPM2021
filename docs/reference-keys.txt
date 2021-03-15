@@ -2,6 +2,7 @@ first-break-out-room
 create-phyloseq-object
 calculate-alpha-diversities
 second-break-out-room
+calculate-beta-diversities
 permanova
 third-break-out-room
 barplot

@@ -6,7 +6,6 @@ site: bookdown::bookdown_site
 ---
 
 # First break-out room  
-
 Study design data 
 ```{r ,echo=FALSE}
 img <- readPNG("Study.png")
@@ -25,8 +24,10 @@ library(picante)
 library(nlme)
 library(ggplot2)
 library(ape)
+library(vegan)
 library(data.table)
 library(DT)
+library(png)
 ```
 
 ## Create Phyloseq object
