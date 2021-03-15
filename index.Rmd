@@ -6,6 +6,7 @@ site: bookdown::bookdown_site
 ---
 
 # First break-out room  
+
 Study design data 
 ```{r ,echo=FALSE}
 img <- readPNG("Study.png")
