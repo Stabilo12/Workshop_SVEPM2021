@@ -9,15 +9,15 @@ set.seed(12345)
 metadata <- as(sample_data(ps1), "data.frame")
 
 ord <- ordinate(ps1, method = "PCoA", distance = "bray") 
-p <- plot_ordination(ps1, ord, color = "Feed",  label="Pen")  #shape= "Pen",
-p1 <- p + theme_bw()  + ggtitle("PCoA Jaccard") 
+p <- plot_ordination(ps1, ord, color = "Feed",  label="Pen", shape= "PenNr")
+p1 <- p + theme_bw()  + ggtitle("PCoA Bray Curtis") 
 p1
 
 ```
 
 ```{r, warning=FALSE, message=FALSE}
 ord <- ordinate(ps1, method = "PCoA", distance = "jaccard", binary = TRUE) ##binary = TRUE!
-p <- plot_ordination(ps1, ord, color = "Feed",  label="Pen")  #shape= "Pen",
+p <- plot_ordination(ps1, ord, color = "Feed",   label="Pen", shape= "PenNr")
 p1 <- p + theme_bw()  + ggtitle("PCoA Jaccard") 
 p1
 
@@ -26,14 +26,14 @@ p1
 ```{r, warning=FALSE, message=FALSE}
 
 ord <- ordinate(ps1, method = "PCoA", distance = "wunifrac") 
-p <- plot_ordination(ps1, ord, color = "Feed",  label="Pen")  #shape= "Pen",
+p <- plot_ordination(ps1, ord, color = "Feed",   label="Pen", shape= "PenNr")
 p1 <- p + theme_bw()  + ggtitle("PCoA wunifrac") 
 p1
 ```
 
 ```{r, warning=FALSE, message=FALSE}
 ord <- ordinate(ps1, method = "PCoA", distance = "unifrac") 
-p <- plot_ordination(ps1, ord, color = "Feed", label="Pen")  #shape= "Pen",
+p <- plot_ordination(ps1, ord, color = "Feed",  label="Pen", shape= "PenNr")
 p1 <- p + theme_bw()  + ggtitle("PCoA unifrac") 
 p1
 ```
