@@ -34,7 +34,7 @@ library(png)
 
 ## Create Phyloseq object
 
-* Let's start with uploading the [data](https://github.com/an-jg/SVEPM2021_workshop), 3 files are needed:
+* Let's start with uploading the [data](https://github.com/Stabilo12/Workshop_SVEPM2021), 3 files are needed:
   + 1. Biom file 
   + 2. Metadata file
   + 3. Tree file
