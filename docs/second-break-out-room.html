@@ -24,7 +24,7 @@
 <meta name="author" content="J.G. Kers &amp; E.A.J. Fischer" />
 
 
-<meta name="date" content="2021-03-15" />
+<meta name="date" content="2021-03-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -188,22 +188,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb31-5"><a href="second-break-out-room.html#cb31-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_ordination</span>(ps1, ord, <span class="at">color =</span> <span class="st">&quot;Feed&quot;</span>,  <span class="at">label=</span><span class="st">&quot;Pen&quot;</span>, <span class="at">shape=</span> <span class="st">&quot;PenNr&quot;</span>)</span>
 <span id="cb31-6"><a href="second-break-out-room.html#cb31-6" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">theme_bw</span>()  <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;PCoA Bray Curtis&quot;</span>) </span>
 <span id="cb31-7"><a href="second-break-out-room.html#cb31-7" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="second-break-out-room.html#cb32-1" aria-hidden="true" tabindex="-1"></a>ord <span class="ot">&lt;-</span> <span class="fu">ordinate</span>(ps1, <span class="at">method =</span> <span class="st">&quot;PCoA&quot;</span>, <span class="at">distance =</span> <span class="st">&quot;jaccard&quot;</span>, <span class="at">binary =</span> <span class="cn">TRUE</span>) <span class="do">##binary = TRUE!</span></span>
 <span id="cb32-2"><a href="second-break-out-room.html#cb32-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_ordination</span>(ps1, ord, <span class="at">color =</span> <span class="st">&quot;Feed&quot;</span>,   <span class="at">label=</span><span class="st">&quot;Pen&quot;</span>, <span class="at">shape=</span> <span class="st">&quot;PenNr&quot;</span>)</span>
 <span id="cb32-3"><a href="second-break-out-room.html#cb32-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">theme_bw</span>()  <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;PCoA Jaccard&quot;</span>) </span>
 <span id="cb32-4"><a href="second-break-out-room.html#cb32-4" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="second-break-out-room.html#cb33-1" aria-hidden="true" tabindex="-1"></a>ord <span class="ot">&lt;-</span> <span class="fu">ordinate</span>(ps1, <span class="at">method =</span> <span class="st">&quot;PCoA&quot;</span>, <span class="at">distance =</span> <span class="st">&quot;wunifrac&quot;</span>) </span>
 <span id="cb33-2"><a href="second-break-out-room.html#cb33-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_ordination</span>(ps1, ord, <span class="at">color =</span> <span class="st">&quot;Feed&quot;</span>,   <span class="at">label=</span><span class="st">&quot;Pen&quot;</span>, <span class="at">shape=</span> <span class="st">&quot;PenNr&quot;</span>)</span>
 <span id="cb33-3"><a href="second-break-out-room.html#cb33-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">theme_bw</span>()  <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;PCoA wunifrac&quot;</span>) </span>
 <span id="cb33-4"><a href="second-break-out-room.html#cb33-4" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="second-break-out-room.html#cb34-1" aria-hidden="true" tabindex="-1"></a>ord <span class="ot">&lt;-</span> <span class="fu">ordinate</span>(ps1, <span class="at">method =</span> <span class="st">&quot;PCoA&quot;</span>, <span class="at">distance =</span> <span class="st">&quot;unifrac&quot;</span>) </span>
 <span id="cb34-2"><a href="second-break-out-room.html#cb34-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_ordination</span>(ps1, ord, <span class="at">color =</span> <span class="st">&quot;Feed&quot;</span>,  <span class="at">label=</span><span class="st">&quot;Pen&quot;</span>, <span class="at">shape=</span> <span class="st">&quot;PenNr&quot;</span>)</span>
 <span id="cb34-3"><a href="second-break-out-room.html#cb34-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">theme_bw</span>()  <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;PCoA unifrac&quot;</span>) </span>
 <span id="cb34-4"><a href="second-break-out-room.html#cb34-4" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p><em>What stands out?</em></p>
 <p><em>Which beta diversity would you use?</em></p>
 </div>
@@ -231,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Total     27    8.4453                 1.0000           
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="second-break-out-room.html#cb37-1" aria-hidden="true" tabindex="-1"></a>ps.disper <span class="ot">&lt;-</span> <span class="fu">betadisper</span>(dist.b, meta<span class="sc">$</span>Feed)</span>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="second-break-out-room.html#cb37-1" aria-hidden="true" tabindex="-1"></a>ps.disper <span class="ot">&lt;-</span> <span class="fu">betadisper</span>(dist.b, metadata<span class="sc">$</span>Feed)</span>
 <span id="cb37-2"><a href="second-break-out-room.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">permutest</span>(ps.disper)</span></code></pre></div>
 <pre><code>## 
 ## Permutation test for homogeneity of multivariate dispersions
@@ -258,7 +258,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Total     27    8.2587                 1.00000           
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="second-break-out-room.html#cb41-1" aria-hidden="true" tabindex="-1"></a>ps.disper <span class="ot">&lt;-</span> <span class="fu">betadisper</span>(dist.j, meta<span class="sc">$</span>Feed)</span>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="second-break-out-room.html#cb41-1" aria-hidden="true" tabindex="-1"></a>ps.disper <span class="ot">&lt;-</span> <span class="fu">betadisper</span>(dist.j, metadata<span class="sc">$</span>Feed)</span>
 <span id="cb41-2"><a href="second-break-out-room.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">permutest</span>(ps.disper)</span></code></pre></div>
 <pre><code>## 
 ## Permutation test for homogeneity of multivariate dispersions
@@ -287,7 +287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Total     27   2.27257                 1.00000           
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="second-break-out-room.html#cb45-1" aria-hidden="true" tabindex="-1"></a>ps.disper <span class="ot">&lt;-</span> <span class="fu">betadisper</span>(dist.uf, meta<span class="sc">$</span>Feed)</span>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="second-break-out-room.html#cb45-1" aria-hidden="true" tabindex="-1"></a>ps.disper <span class="ot">&lt;-</span> <span class="fu">betadisper</span>(dist.uf, metadata<span class="sc">$</span>Feed)</span>
 <span id="cb45-2"><a href="second-break-out-room.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">permutest</span>(ps.disper)</span></code></pre></div>
 <pre><code>## 
 ## Permutation test for homogeneity of multivariate dispersions
@@ -316,7 +316,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Total     27   1.06045                 1.0000           
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="second-break-out-room.html#cb49-1" aria-hidden="true" tabindex="-1"></a>ps.disper <span class="ot">&lt;-</span> <span class="fu">betadisper</span>(dist.wuf, meta<span class="sc">$</span>Feed)</span>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="second-break-out-room.html#cb49-1" aria-hidden="true" tabindex="-1"></a>ps.disper <span class="ot">&lt;-</span> <span class="fu">betadisper</span>(dist.wuf, metadata<span class="sc">$</span>Feed)</span>
 <span id="cb49-2"><a href="second-break-out-room.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">permutest</span>(ps.disper)</span></code></pre></div>
 <pre><code>## 
 ## Permutation test for homogeneity of multivariate dispersions

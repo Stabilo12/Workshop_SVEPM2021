@@ -24,7 +24,7 @@
 <meta name="author" content="J.G. Kers &amp; E.A.J. Fischer" />
 
 
-<meta name="date" content="2021-03-15" />
+<meta name="date" content="2021-03-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -182,28 +182,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.1</span> Barplot</h2>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="third-break-out-room.html#cb51-1" aria-hidden="true" tabindex="-1"></a>ps1.com <span class="ot">&lt;-</span> microbiome<span class="sc">::</span><span class="fu">transform</span>(ps1, <span class="st">&quot;compositional&quot;</span>)</span>
 <span id="cb51-2"><a href="third-break-out-room.html#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-3"><a href="third-break-out-room.html#cb51-3" aria-hidden="true" tabindex="-1"></a>ps1.com.fil <span class="ot">=</span> <span class="fu">filter_taxa</span>(ps1.com, <span class="cf">function</span>(x) <span class="fu">sum</span>(x) <span class="sc">&gt;</span> .<span class="dv">01</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb51-4"><a href="third-break-out-room.html#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-5"><a href="third-break-out-room.html#cb51-5" aria-hidden="true" tabindex="-1"></a>ps.phylum <span class="ot">=</span> <span class="fu">tax_glom</span>(ps1.com.fil, <span class="at">taxrank=</span><span class="st">&quot;Family&quot;</span>, <span class="at">NArm=</span><span class="cn">FALSE</span>) </span>
-<span id="cb51-6"><a href="third-break-out-room.html#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bar</span>(ps.phylum, <span class="at">fill=</span><span class="st">&quot;Family&quot;</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Pen, <span class="at">scales=</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<span id="cb51-3"><a href="third-break-out-room.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="co"># filtering    0.001, 0.01,  </span></span>
+<span id="cb51-4"><a href="third-break-out-room.html#cb51-4" aria-hidden="true" tabindex="-1"></a>ps1.com.fil <span class="ot">=</span> <span class="fu">filter_taxa</span>(ps1.com, <span class="cf">function</span>(x) <span class="fu">sum</span>(x) <span class="sc">&gt;</span> .<span class="dv">01</span>, <span class="cn">TRUE</span>)  </span>
+<span id="cb51-5"><a href="third-break-out-room.html#cb51-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-6"><a href="third-break-out-room.html#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Phylum - Family</span></span>
+<span id="cb51-7"><a href="third-break-out-room.html#cb51-7" aria-hidden="true" tabindex="-1"></a>ps.phylum <span class="ot">=</span> <span class="fu">tax_glom</span>(ps1.com.fil, <span class="at">taxrank=</span><span class="st">&quot;Phylum&quot;</span>, <span class="at">NArm=</span><span class="cn">FALSE</span>)  </span>
+<span id="cb51-8"><a href="third-break-out-room.html#cb51-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bar</span>(ps.phylum, <span class="at">fill=</span><span class="st">&quot;Phylum&quot;</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Pen, <span class="at">scales=</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">nrow=</span><span class="dv">1</span>)  </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p><em>Try how filtering influence the barplot</em></p>
 </div>
 <div id="dendrogram" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Dendrogram</h2>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="third-break-out-room.html#cb52-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">distance</span>(ps1, <span class="at">method =</span> <span class="st">&quot;jaccard&quot;</span>, <span class="at">binary =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb52-2"><a href="third-break-out-room.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="co">#d &lt;- distance(ps1, method = &quot;wunifrac&quot;)   #  distance</span></span>
-<span id="cb52-3"><a href="third-break-out-room.html#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-4"><a href="third-break-out-room.html#cb52-4" aria-hidden="true" tabindex="-1"></a>hpws <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d, <span class="at">method =</span> <span class="st">&quot;ward.D2&quot;</span>)</span>
-<span id="cb52-5"><a href="third-break-out-room.html#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="co"># add color </span></span>
-<span id="cb52-6"><a href="third-break-out-room.html#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dendextend)</span>
-<span id="cb52-7"><a href="third-break-out-room.html#cb52-7" aria-hidden="true" tabindex="-1"></a>dend <span class="ot">&lt;-</span> <span class="fu">as.dendrogram</span>(hpws)</span>
-<span id="cb52-8"><a href="third-break-out-room.html#cb52-8" aria-hidden="true" tabindex="-1"></a>colors_to_use <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(meta<span class="sc">$</span>Pen)</span>
-<span id="cb52-9"><a href="third-break-out-room.html#cb52-9" aria-hidden="true" tabindex="-1"></a>colors_to_use <span class="ot">&lt;-</span> colors_to_use[<span class="fu">order.dendrogram</span>(dend)]</span>
-<span id="cb52-10"><a href="third-break-out-room.html#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="fu">labels_colors</span>(dend) <span class="ot">&lt;-</span> colors_to_use</span>
-<span id="cb52-11"><a href="third-break-out-room.html#cb52-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-12"><a href="third-break-out-room.html#cb52-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.dendrogram</span>(dend, <span class="at">hang =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">cex =</span> <span class="fl">0.6</span>)) </span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="third-break-out-room.html#cb52-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">distance</span>(ps1, <span class="at">method =</span> <span class="st">&quot;bray&quot;</span>)</span>
+<span id="cb52-2"><a href="third-break-out-room.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="co">#d &lt;- distance(ps1, method = &quot;jaccard&quot;, binary = TRUE)</span></span>
+<span id="cb52-3"><a href="third-break-out-room.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co">#d &lt;- distance(ps1, method = &quot;unifrac&quot;)  </span></span>
+<span id="cb52-4"><a href="third-break-out-room.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co">#d &lt;- distance(ps1, method = &quot;wunifrac&quot;)   #  distance</span></span>
+<span id="cb52-5"><a href="third-break-out-room.html#cb52-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-6"><a href="third-break-out-room.html#cb52-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-7"><a href="third-break-out-room.html#cb52-7" aria-hidden="true" tabindex="-1"></a>hpws <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d, <span class="at">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb52-8"><a href="third-break-out-room.html#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="co">#hpws &lt;- hclust(d, method = &quot;ward.D2&quot;)</span></span>
+<span id="cb52-9"><a href="third-break-out-room.html#cb52-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-10"><a href="third-break-out-room.html#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="co"># add color </span></span>
+<span id="cb52-11"><a href="third-break-out-room.html#cb52-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dendextend)</span>
+<span id="cb52-12"><a href="third-break-out-room.html#cb52-12" aria-hidden="true" tabindex="-1"></a>dend <span class="ot">&lt;-</span> <span class="fu">as.dendrogram</span>(hpws)</span>
+<span id="cb52-13"><a href="third-break-out-room.html#cb52-13" aria-hidden="true" tabindex="-1"></a>colors_to_use <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(meta<span class="sc">$</span>Pen)</span>
+<span id="cb52-14"><a href="third-break-out-room.html#cb52-14" aria-hidden="true" tabindex="-1"></a>colors_to_use <span class="ot">&lt;-</span> colors_to_use[<span class="fu">order.dendrogram</span>(dend)]</span>
+<span id="cb52-15"><a href="third-break-out-room.html#cb52-15" aria-hidden="true" tabindex="-1"></a><span class="fu">labels_colors</span>(dend) <span class="ot">&lt;-</span> colors_to_use</span>
+<span id="cb52-16"><a href="third-break-out-room.html#cb52-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-17"><a href="third-break-out-room.html#cb52-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.dendrogram</span>(dend, <span class="at">hang =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">cex =</span> <span class="fl">0.6</span>)) </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p><em>Try how cluster type influence the dendrogram</em></p>
 
 </div>

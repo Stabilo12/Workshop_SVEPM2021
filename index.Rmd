@@ -8,6 +8,7 @@ site: bookdown::bookdown_site
 # First break-out room  
 
 Study design data 
+The intestinal microbiota is shaped by many interactions between microorganisms, host, diet, and the environment. Exposure to microorganisms present in the environment, and the exchange of microorganisms between hosts sharing the same environment, can influence the intestinal microbiota of individuals, but how this affects microbiota studies is poorly understood. We investigated the effects of experimental housing circumstances on intestinal microbiota composition in broiler chickens, and how these effects may influence the capacity to determine diet-related effects in a nutrition experiment. A known feed intervention was used to create differences in cecal microbiota between pens within the same housing condition (Feed A or Feed B). After 35 days cecal microbiota composition was assessed by 16S ribosomal RNA gene amplicon sequencing of seven broilers per pen. For this workshop, we use a subset of four pens. 
 ```{r ,echo=FALSE}
 img <- readPNG("Study.png")
  grid.raster(img)
@@ -32,14 +33,21 @@ library(png)
 ```
 
 ## Create Phyloseq object
-> Additional reading [Phyloseq](https://joey711.github.io/phyloseq/) 
 
-* Let's start with uploading the [data](https://github.com/Stabilo12/Workshop_SVEPM2021), 3 files are needed:
+* Let's start with uploading the [data](https://github.com/an-jg/SVEPM2021_workshop), 3 files are needed:
   + 1. Biom file 
   + 2. Metadata file
   + 3. Tree file
+
+The data can be downloaded via "Download ZIP"    
+The 3 files need to be in your current working directory (you can run the command getwd() in the RStudio console to check)
   
-> The data we use in this workshop has been [publised](https://doi.org/10.1186/s42523-019-0009-z ) 
+```{r ,echo=FALSE}
+img <- readPNG("data.png")
+ grid.raster(img)
+```
+
+> Additional reading [Phyloseq](https://joey711.github.io/phyloseq/)     
 
 A phyloseq object contains information on: the abundances of the amplicon sequence variant (ASV), the taxonomy of the ASV, the phylogenetic tree, and the metadata of the samples. 
 
@@ -61,8 +69,9 @@ We can view the  taxonomy of the ASV within a taxa table:
 datatable(tax_table(ps))
 ```
 
-The focus is on the diversities but a *mini* sequences controle cannot be missed.  
-The datatable shows the presences of an unknown Domain ("NA"), we want to remove this.   
+The focus is on the diversities but a *mini* sequences quality control cannot be missed.  
+The datatable shows the presences of an unknown Domain ("NA"), we want to remove this. 
+
 *Do you know why?*
 
 ```{r}
@@ -97,7 +106,7 @@ plot_richness(ps1, "Pen", "Feed", measures=c("Observed", "Shannon", "Simpson", "
 **Let's test the four different (non-phylogenetic) alpha diversities on feed and pen** 
 ```{r, warning = FALSE}
 alpha <- estimate_richness(ps1, measures = c("Observed", "Shannon", "Simpson", "InvSimpson" ))
-meta <- meta(ps1)  #extract metadata
+meta <- meta(ps1)  #extract metadata from phyloseq object
 ```
 
 Observed
@@ -144,6 +153,9 @@ print(kruskal.pd)
 
 pairwise.wilcox.test(meta$Phylogenetic_Diversity, meta$Pen, p.adjust.method = "BH")
 ```
+
+> The data we use in this workshop has been [publised](https://doi.org/10.1186/s42523-019-0009-z ) 
+
 
 > Additional reading
 > Shetty Sudarshan A, Lahti Leo, Hermes Gerben DA, & Hauke Smidt. (2020, April 11) 

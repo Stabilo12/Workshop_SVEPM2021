@@ -53,19 +53,19 @@ dist.wuf <- phyloseq::distance(ps1, method = "wunifrac")
 
 
 adonis(dist.b ~ Feed, data = metadata, perm=9999) 
-ps.disper <- betadisper(dist.b, meta$Feed)
+ps.disper <- betadisper(dist.b, metadata$Feed)
 permutest(ps.disper)
 
 adonis(dist.j ~ Feed, data = metadata, perm=9999) 
-ps.disper <- betadisper(dist.j, meta$Feed)
+ps.disper <- betadisper(dist.j, metadata$Feed)
 permutest(ps.disper)
 
 adonis(dist.uf ~ Feed, data = metadata, perm=9999) 
-ps.disper <- betadisper(dist.uf, meta$Feed)
+ps.disper <- betadisper(dist.uf, metadata$Feed)
 permutest(ps.disper)
 
 adonis(dist.wuf ~ Feed, data = metadata, perm=9999) 
-ps.disper <- betadisper(dist.wuf, meta$Feed)
+ps.disper <- betadisper(dist.wuf, metadata$Feed)
 permutest(ps.disper)
 
 ```

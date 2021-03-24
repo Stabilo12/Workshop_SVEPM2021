@@ -4,10 +4,13 @@
 ```{r}
 ps1.com <- microbiome::transform(ps1, "compositional")
 
-ps1.com.fil = filter_taxa(ps1.com, function(x) sum(x) > .01, TRUE)
+# filtering    0.001, 0.01,  
+ps1.com.fil = filter_taxa(ps1.com, function(x) sum(x) > .01, TRUE)  
 
-ps.phylum = tax_glom(ps1.com.fil, taxrank="Family", NArm=FALSE) 
-plot_bar(ps.phylum, fill="Family") + facet_wrap(~Pen, scales= "free_x", nrow=1)
+# Phylum - Family
+ps.phylum = tax_glom(ps1.com.fil, taxrank="Phylum", NArm=FALSE)  
+plot_bar(ps.phylum, fill="Phylum") + facet_wrap(~Pen, scales= "free_x", nrow=1)  
+
 
 ```
 
@@ -17,10 +20,15 @@ plot_bar(ps.phylum, fill="Family") + facet_wrap(~Pen, scales= "free_x", nrow=1)
 
 ## Dendrogram
 ```{r}
-d <- distance(ps1, method = "jaccard", binary = TRUE)
+d <- distance(ps1, method = "bray")
+#d <- distance(ps1, method = "jaccard", binary = TRUE)
+#d <- distance(ps1, method = "unifrac")  
 #d <- distance(ps1, method = "wunifrac")   #  distance
 
-hpws <- hclust(d, method = "ward.D2")
+
+hpws <- hclust(d, method = "complete")
+#hpws <- hclust(d, method = "ward.D2")
+
 # add color 
 library(dendextend)
 dend <- as.dendrogram(hpws)
